@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain 'errors' %}
+trans
+{% block body %}
+    <h1>Page not found</h1>
+
+    <p>
+        {% trans %}error.404{% endtrans %}
+    </p>
+{% endblock %}

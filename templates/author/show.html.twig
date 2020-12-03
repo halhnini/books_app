@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<title>Author</title>
+
+{% block body %}
+    <h1>Author</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ author.id }}</td>
+            </tr>
+            <tr>
+                <th>FirstName</th>
+                <td>{{ author.firstName }}</td>
+            </tr>
+            <tr>
+                <th>LastName</th>
+                <td>{{ author.lastName }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ author.slug }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ author.address }}</td>
+            </tr>
+            <tr>
+                <th>BirthDate</th>
+                <td>{{ author.birthDate ? author.birthDate|date('Y-m-d H:i:s T') : '' }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ author.createdAt ? author.createdAt|date('Y-m-d H:i:s T') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ author.updatedAt ? author.updatedAt|date('Y-m-d H:i:s T') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('author_index') }}">back to list</a>
+
+    <a href="{{ path('author_edit', {'id': author.id}) }}">edit</a>
+
+    {{ include('author/_delete_form.html.twig') }}
+
+    <h1>His books</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <th>Slug</th>
+            <th>Name</th>
+            <th>Abstract</th>
+            <th>Isbn13</th>
+            <th>Isbn
+            <th>CreatedAt</th>
+            <th>UpdatedAt</th>
+            <th>access</th>
+        </tr>
+        {% if author.books is not empty  %}
+            {% for book in books %}
+                <td>{{ book.id }}</td>
+                <td>{{ book.slug }}</td>
+                <td>{{ book.name }}</td>
+                <td>{{ book.abstract }}</td>
+                <td>{{ book.isbn }}</td>
+                <td>{{ book.createdAt ? book.createdAt|date('Y-m-d H:i:s T') : '' }}</td>
+                <td>{{ book.updatedAt ? book.updatedAt|date('Y-m-d H:i:s T') : '' }}</td>
+                <td>
+                    <a href="{{ path('book_show', {'id': book.id}) }}">show</a>
+                    <a href="{{ path('book_edit', {'id': book.id}) }}">edit</a>
+                </td>
+            {% endfor %}
+        {% endif %}
+        <tr>
+            <th>Slug</th>
+            <td>{{ book.slug }}</td>
+        </tr>
+
+        </tbody>
+    </table>
+{% endblock %}
